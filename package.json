@@ -1,0 +1,20 @@
+{
+  "name": "aoc-template",
+  "version": "1.0.0",
+  "description": "advent of code template",
+  "main": "index.js",
+  "scripts": {
+    "aoc": "node -r dotenv/config index.js",
+    "debug": "node -r dotenv/config index.js"
+  },
+  "keywords": [
+    "aoc"
+  ],
+  "author": "Matej Capkovic",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "node-fetch": "^2.6.0"
+  }
+}
