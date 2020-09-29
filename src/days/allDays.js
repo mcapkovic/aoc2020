@@ -1,5 +1,5 @@
 import { solution as day1 } from "./day1/solution";
-// import { solution as day2 } from "./day2/solution";
+import { solution as day2 } from "./day2/solution";
 // import { solution as day3 } from "./day3/solution";
 // import { solution as day4 } from "./day4/solution";
 // import { solution as day5 } from "./day5/solution";
@@ -26,7 +26,7 @@ import { solution as day1 } from "./day1/solution";
 
 export const allDays = [
   day1,
-  // day2,
+  day2,
   // day3,
   // day4,
   // day5,
