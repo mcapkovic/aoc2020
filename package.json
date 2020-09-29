@@ -1,14 +1,15 @@
 {
-  "name": "aoc-template",
+  "name": "aoc-node-template",
   "version": "1.0.0",
-  "description": "advent of code template",
+  "description": "advent of code node template",
   "main": "index.js",
   "scripts": {
-    "aoc": "node -r dotenv/config index.js",
+    "day": "node -r dotenv/config index.js",
     "debug": "node -r dotenv/config index.js"
   },
   "keywords": [
-    "aoc"
+    "aoc",
+    "advent of code"
   ],
   "author": "Matej Capkovic",
   "license": "MIT",
