@@ -1,5 +1,6 @@
 const fs = require("fs");
 var fetch = require("node-fetch");
+import { loadingFile, missingSession, inputFetching } from "../constants";
 
 async function fetchInput(
   year = 2019,
@@ -26,20 +27,19 @@ async function fetchInput(
 }
 
 export async function getAocInput(year, day, session) {
-  if (!session) {
-    console.log("Missing session. Can not load data.");
-    return "";
-  }
   let data = null;
   const folder = `./src/days/day${day}`;
   const file = "/input.txt";
   const path = `${folder}${file}`;
 
   if (fs.existsSync(path)) {
-    console.log("Local input file found.");
+    console.log(loadingFile);
     data = fs.readFileSync(path, "utf8");
+  } else if (!session) {
+    console.log(missingSession);
+    data = "";
   } else {
-    console.log("Fetching the input.");
+    console.log(inputFetching);
     data = await fetchInput(year, day, session, path);
   }
 
