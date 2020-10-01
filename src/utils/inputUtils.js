@@ -43,5 +43,5 @@ export async function getAocInput(year, day, session) {
     data = await fetchInput(year, day, session, path);
   }
 
-  return data;
+  return data.trim();
 }
