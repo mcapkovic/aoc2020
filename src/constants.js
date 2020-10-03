@@ -19,7 +19,7 @@ export const part2Welcome = `#--- Second part of the solution ----#
 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓`;
 // export const part2Welcome = "-- Second part of the solution --";
 
-export const noDayFound = "no day found";
+export const noDayFound = "no solution found";
 export const loadingFile = "Loading input from the local file.";
 export const missingSession = "Missing session. Can not fetch the input.";
 export const inputFetching = "Fetching the input.";

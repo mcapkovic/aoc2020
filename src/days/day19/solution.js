@@ -1,31 +1,25 @@
-import { dayWelcome, part1Welcome, part2Welcome } from "../../constants";
-
-function part1(inputValue) {
-  console.log(part1Welcome);
-
+export function partOneCode(input) {
   /**
    * space for the code
    */
+  return "Part1 answer.";
 }
 
-function part2(inputValue) {
-  console.log(part2Welcome);
-
+export function partTwoCode(input) {
   /**
    * space for the code
    */
+  return "Part2 answer.";
 }
 
-const allParts = [part1, part2];
-
-export function solution(dayNumber, partNumber, input) {
-  console.log(dayWelcome(dayNumber));
-  let todaysInput = input;
-
-  if (partNumber > 0) {
-    const requestedPart = allParts[partNumber - 1];
-    if (requestedPart) requestedPart(todaysInput);
-  } else {
-    allParts.forEach((part) => part(todaysInput));
-  }
+export function inputParse(originalInput) {
+  /**
+   * Add input logic and test inputs here
+   */
+  const inputToPrint = originalInput;
+  const parsedInput = originalInput;
+  return {
+    inputToPrint, // *optional - inputToPrint will be printed if available
+    parsedInput, // input data for partOneCode and partTwoCode
+  };
 }
