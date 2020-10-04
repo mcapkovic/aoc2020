@@ -3,25 +3,28 @@ import { noDayFound } from "./constants";
 import { getAocInput } from "./utils/inputUtils";
 import {
   printTitle,
-  printInput,
   printAnswer,
   printError,
+  printOriginalInput,
+  printParsedInput,
 } from "./utils/printUtils";
 import { dayWelcome, part1Welcome, part2Welcome } from "./constants";
 
 function par1(rawInput, daySolution, noInputPrint) {
-  const { inputToPrint, parsedInput } = daySolution.inputParse(rawInput);
+  const { inputToPrint, parsedInput, parsedInputToPrint } = daySolution.inputParse(rawInput);
   printTitle(part1Welcome);
-  if (!noInputPrint && inputToPrint) printInput(inputToPrint);
+  if (!noInputPrint && inputToPrint) printOriginalInput(inputToPrint);
+  if (!noInputPrint && parsedInputToPrint) printParsedInput(parsedInputToPrint);
   const answer = daySolution.partOneCode(parsedInput);
   printAnswer(answer);
 }
 
 function par2(rawInput, daySolution, noInputPrint) {
-  const { inputToPrint, parsedInput } = daySolution.inputParse(rawInput);
+  const { inputToPrint, parsedInput, parsedInputToPrint } = daySolution.inputParse(rawInput);
   printTitle(part2Welcome);
-  if (!noInputPrint && inputToPrint) printInput(inputToPrint);
-  const answer = daySolution.partTwoCode(parsedInput);
+  if (!noInputPrint && inputToPrint) printOriginalInput(inputToPrint);
+  if (!noInputPrint && parsedInputToPrint) printParsedInput(parsedInputToPrint);
+    const answer = daySolution.partTwoCode(parsedInput);
   printAnswer(answer);
 }
 
