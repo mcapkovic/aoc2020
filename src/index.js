@@ -36,11 +36,11 @@ async function runAOC() {
 
   if (day < 1 || day > 25) return printError(noDayFound);
   if (part < 0 || part > 2) return printError(noDayFound);
-  printTitle(dayWelcome(day));
 
   const rawInput = await getAocInput(year, day, session);
   const daySolution = allDays[day - 1];
-
+  
+  printTitle(dayWelcome(day));
   if (part === 1) {
     par1(rawInput, daySolution);
   } else if (part === 2) {
