@@ -16,8 +16,9 @@ export function printParsedInput(message) {
 }
 
 export function printAnswer(message) {
+  const string = JSON.stringify(message, null, 4);
   console.log("\x1b[32m%s\x1b[0m", "Answer:");
-  console.log("\x1b[32m%s\x1b[0m", message);
+  console.log("\x1b[32m%s\x1b[0m", string);
   console.log("\x1b[32m%s\x1b[0m", separator);
 }
 
