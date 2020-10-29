@@ -13,13 +13,15 @@ export function partTwoCode(input) {
 }
 
 export function inputParse(originalInput) {
-  /**
-   * Add input logic and test inputs here
+  const currentInput = originalInput;
+  let parsedInput = currentInput;
+   /**
+   * Add input logic here
    */
-  const inputToPrint = originalInput;
-  const parsedInput = originalInput;
+
   return {
-    inputToPrint, // *optional - inputToPrint will be printed if available
+    inputToPrint: currentInput, // *optional - inputToPrint will be printed if available
+    parsedInputToPrint: parsedInput, // *optional - parsedInputToPrint will be printed if available
     parsedInput, // input data for partOneCode and partTwoCode
   };
 }
