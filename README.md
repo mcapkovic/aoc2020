@@ -12,16 +12,22 @@ npm install
 
 ## Usage
 
-```bash
-npm run day 1 1 # run day 1 part 1
-```
+- create .env file in the root with your session and year 
 
-*optional - create .env file in the root
+    ```js
+    SESSION="" // your aoc session
+    YEAR="2017" // aoc year
+    ```
 
-```js
-SESSION="" // your aoc session
-YEAR="2017" // aoc year
-```
+- edit your code in the `src/days/day{x}/solution.js` where x is the day number ( `src/days/day1/solution.js` for day1 )
+
+- run the code and download aoc input run:
+    ```bash
+    npm run day 1 1 # run day {day} part {part}
+    ```
+
+    ( aoc input will be downloaded only once and saved to input.txt )
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
