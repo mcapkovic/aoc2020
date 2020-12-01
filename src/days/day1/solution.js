@@ -1,43 +1,29 @@
 export function partOneCode(input) {
-  let numbers = [];
-  // input.forEach((mainNumber) => {
-  //   input.forEach((subNumber) => {
-  //     if (mainNumber + subNumber === 2020) {
-  //       numbers = [mainNumber, subNumber];
-  //     }
-  //   });
-  // });
+  const inputSet = new Set(input);
+  let result = 0;
 
-  input.some((mainNumber) => {
-    input.some((subNumber) => {
-      if (mainNumber + subNumber === 2020) {
-        numbers = [mainNumber, subNumber];
-        return true;
-      }
-    });
+  input.some((firstNumber) => {
+    const secondNumber = 2020 - firstNumber;
+    if (!inputSet.has(secondNumber)) return false;
+    result = firstNumber * secondNumber;
+    return true;
   });
-
-  const result = numbers[0] * numbers[1];
 
   return result;
 }
 
 export function partTwoCode(input) {
-  let numbers = [];
+  let result = 0;
   input.some((mainNumber) => {
     input.some((subNumber) => {
       input.some((subSubNumber) => {
         if (mainNumber + subNumber + subSubNumber === 2020) {
-          numbers = [mainNumber, subNumber, subSubNumber];
+          result = mainNumber * subNumber * subSubNumber;
           return true;
         }
       });
     });
   });
-
-  const result = numbers.reduce(
-    (accumulator, currentValue) => accumulator * currentValue
-  );
 
   return result;
 }

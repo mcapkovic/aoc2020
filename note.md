@@ -27,6 +27,7 @@ origin	https://github.com/mcapkovic/aoc-node-template.git (fetch)
 origin	https://github.com/mcapkovic/aoc-node-template.git (push)
 ```
 
+// push to remote branch
 
 // add upstrem to branch 2020
 ```bash
