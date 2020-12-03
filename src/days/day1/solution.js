@@ -1,3 +1,14 @@
+/**
+ * == PART1 ==
+ * nested loops
+ * some
+ * Set
+ * 
+ * == PART2 ==
+ * nested loops
+ * 
+ */
+
 export function partOneCode(input) {
   const inputSet = new Set(input);
   let result = 0;

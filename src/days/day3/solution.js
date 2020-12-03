@@ -1,3 +1,12 @@
+/**
+ * == PART1 ==
+ * loop
+ * infinite x direction
+ * 
+ * == PART2 ==
+ * loops with variable x,y steps
+ */
+
 export function partOneCode(input) {
   let treeCount = 0;
   let currentXPos = 0;

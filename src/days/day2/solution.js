@@ -1,3 +1,12 @@
+/**
+ * == PART1 ==
+ * match with variable regex expression 
+ * count specific letter in string
+ * 
+ * == PART2 ==
+ * check char position in string
+ */
+
 export function partOneCode(input) {
   const correctPass = [];
   input.forEach((row) => {
