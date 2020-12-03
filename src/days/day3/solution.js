@@ -1,23 +1,64 @@
 export function partOneCode(input) {
-  /**
-   * space for the code
-   */
-  return "Part1 answer.";
+  let treeCount = 0;
+  let currentXPos = 0;
+
+  input.forEach((row) => {
+    if (row[currentXPos] === "#") treeCount++;
+    currentXPos = currentXPos + 3;
+    if (currentXPos >= row.length) currentXPos = currentXPos % row.length;
+  });
+
+  return treeCount;
+}
+
+function countTrees([xStep, yStep], input) {
+  let treeCount = 0;
+  let currentXPos = 0;
+  let currentYPos = 0;
+
+  while (currentYPos < input.length) {
+    const row = input[currentYPos];
+    if (row[currentXPos] === "#") treeCount++;
+
+    currentYPos = currentYPos + yStep;
+    currentXPos = currentXPos + xStep;
+    if (currentXPos >= row.length) currentXPos = currentXPos % row.length;
+  }
+
+  return treeCount;
 }
 
 export function partTwoCode(input) {
-  /**
-   * space for the code
-   */
-  return "Part2 answer.";
+  const slopes = [
+    [1, 1],
+    [3, 1],
+    [5, 1],
+    [7, 1],
+    [1, 2],
+  ];
+
+  return slopes
+    .map((slope) => countTrees(slope, input))
+    .reduce((accumulator, currentValue) => accumulator * currentValue);
 }
+
+const e1p1 = `
+..##.......
+#...#...#..
+.#....#..#.
+..#.#...#.#
+.#...##..#.
+..#.##.....
+.#.#.#....#
+.#........#
+#.##...#...
+#...##....#
+.#..#...#.#
+`;
 
 export function inputParse(originalInput) {
   const currentInput = originalInput;
-  let parsedInput = currentInput;
-   /**
-   * Add input logic here
-   */
+  let parsedInput = currentInput.trim().split("\n");
 
   return {
     inputToPrint: currentInput, // *optional - inputToPrint will be printed if available
