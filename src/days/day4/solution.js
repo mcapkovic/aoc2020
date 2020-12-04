@@ -12,55 +12,49 @@ export function partOneCode(input) {
 }
 
 const validator = {
-  byr: (data) => {
-    if (!data) return false;
+  byr: (data = "") => {
     const value = Number(data);
     if (value < 1920) return false;
     if (value > 2002) return false;
     return true;
   },
-  iyr: (data) => {
-    if (!data) return false;
+  iyr: (data = "") => {
     const value = Number(data);
     if (value < 2010) return false;
     if (value > 2020) return false;
     return true;
   },
-  eyr: (data) => {
-    if (!data) return false;
+  eyr: (data = "") => {
     const value = Number(data);
     if (value < 2020) return false;
     if (value > 2030) return false;
     return true;
   },
-  hgt: (data) => {
-    if (!data) return false;
-    const height = data.match(/^(([0-9]*)((cm|in)))*$/);
-    if (!height) return false;
+  hgt: (data = "") => {
+    const heightData = data.match(/^([0-9]*)(cm|in)$/);
+    if (!heightData) return false;
 
-    const number = Number(height[2]);
-    if (height[3] === "in") {
-      if (number < 59) return false;
-      if (number > 76) return false;
+    const unit = heightData[2];
+    const height = Number(heightData[1]);
+    if (unit === "in") {
+      if (height < 59) return false;
+      if (height > 76) return false;
     } else {
-      if (number < 150) return false;
-      if (number > 193) return false;
+      if (height < 150) return false;
+      if (height > 193) return false;
     }
     return true;
   },
-  hcl: (data) => {
-    if (!data) return false;
+  hcl: (data = "") => {
     if (!data.match(/^#(([\da-f]{3}){1,2}|([\da-f]{4}){1,2})$/)) return false;
     return true;
   },
-  ecl: (data) => {
-    if (!data) return false;
+  ecl: (data = "") => {
     const validColors = ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"];
     if (!validColors.includes(data)) return false;
     return true;
   },
-  pid: (data) => {
-    if (!data) return false;
+  pid: (data = "") => {
     if (data.length != 9) return false;
     if (isNaN(data)) return false;
     return true;
