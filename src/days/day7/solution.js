@@ -1,3 +1,14 @@
+/**
+ * == PART1 ==
+ * count bags
+ * do while
+ * set
+ * 
+ * == PART2 ==
+ * count nested bags
+ * recursion
+ */
+
 const MY_BAG = "shiny gold";
 
 export function partOneCode(input) {
@@ -37,20 +48,22 @@ export function partTwoCode(input) {
     input.some((row) => {
       if (!row.bag.includes(color)) return;
 
-      const counts = row.content.map((bag) => {
-        if (bag.count === 0) return 0;
+      // count bags recursively 
+      count = row.content
+        .map((bag) => {
+          if (bag.count === 0) return 0;
 
-        const newColor = bag.bags.replace("bags", "").replace("bag", "").trim();
+          const newColor = bag.bags
+            .replace("bags", "")
+            .replace("bag", "")
+            .trim();
 
-        const subBagsCount = countBags(newColor);
+          const subBagsCount = countBags(newColor);
 
-        if (subBagsCount === 0) return bag.count; // triggered by lowest level bag
-        return bag.count * subBagsCount + bag.count;
-      });
-
-      count = counts.reduce(
-        (accumulator, currentValue) => accumulator + currentValue
-      );
+          if (subBagsCount === 0) return bag.count; // triggered by lowest level bag
+          return bag.count * subBagsCount + bag.count;
+        }) // get bag counts
+        .reduce((accumulator, currentValue) => accumulator + currentValue); // get sum of all bags
     });
 
     return count;
