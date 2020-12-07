@@ -2,7 +2,7 @@ const MY_BAG = "shiny gold";
 
 export function partOneCode(input) {
   let count = new Set();
-  let outermostBags = new Set([MY_BAG]) ;
+  let outermostBags = new Set([MY_BAG]);
 
   function countBags(currentSubBags) {
     outermostBags.clear();
@@ -10,30 +10,53 @@ export function partOneCode(input) {
       row.content.forEach((content) => {
         currentSubBags.forEach((element) => {
           if (content.bags.includes(element)) {
-            const newColor = row.bag.replace('bags','').replace('bag','').trim()
-            outermostBags.add(newColor)
-            count.add(newColor)
-          };
+            const newColor = row.bag
+              .replace("bags", "")
+              .replace("bag", "")
+              .trim();
+            outermostBags.add(newColor);
+            count.add(newColor);
+          }
         });
       });
     });
   }
 
-  
   do {
     countBags([...outermostBags]);
-
   } while (outermostBags.size > 0);
-
 
   return count.size;
 }
 
 export function partTwoCode(input) {
-  /**
-   * space for the code
-   */
-  return "Part2 answer.";
+  function countBags(color) {
+    let count = 0; // bags count in this iteration
+
+    // find bag information
+    input.some((row) => {
+      if (!row.bag.includes(color)) return;
+
+      const counts = row.content.map((bag) => {
+        if (bag.count === 0) return 0;
+
+        const newColor = bag.bags.replace("bags", "").replace("bag", "").trim();
+
+        const subBagsCount = countBags(newColor);
+
+        if (subBagsCount === 0) return bag.count; // triggered by lowest level bag
+        return bag.count * subBagsCount + bag.count;
+      });
+
+      count = counts.reduce(
+        (accumulator, currentValue) => accumulator + currentValue
+      );
+    });
+
+    return count;
+  }
+
+  return countBags(MY_BAG);
 }
 
 const e1p1 = `
@@ -48,9 +71,21 @@ faded blue bags contain no other bags.
 dotted black bags contain no other bags.
 `;
 
+const e1p2 = `
+shiny gold bags contain 2 dark red bags.
+dark red bags contain 2 dark orange bags.
+dark orange bags contain 2 dark yellow bags.
+dark yellow bags contain 2 dark green bags.
+dark green bags contain 2 dark blue bags.
+dark blue bags contain 2 dark violet bags.
+dark violet bags contain no other bags.
+`;
+
 export function inputParse(originalInput) {
-  // const currentInput = e1p1;
-  const currentInput = originalInput;
+  let currentInput = e1p1;
+  currentInput = e1p2;
+
+  currentInput = originalInput;
   let parsedInput = currentInput
     .trim()
     .split("\n")
@@ -67,9 +102,6 @@ export function inputParse(originalInput) {
         }),
       };
     });
-  /**
-   * Add input logic here
-   */
 
   return {
     inputToPrint: currentInput, // *optional - inputToPrint will be printed if available
@@ -80,3 +112,4 @@ export function inputParse(originalInput) {
 
 // 134
 // 118 too low
+//145060 too low

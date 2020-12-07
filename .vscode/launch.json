@@ -19,8 +19,8 @@
         "run-script",
         "debug",
         "--",
-        "1", // day
-        "1" // part
+        "7", // day
+        "2" // part
       ],
       "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**"],
