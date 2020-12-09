@@ -57,6 +57,7 @@ function runProgram(input) {
     position = positionIncrement;
   } while (true);
 }
+
 export function partTwoCode(input) {
   const nopIndex = [];
   const jumpIndex = [];
