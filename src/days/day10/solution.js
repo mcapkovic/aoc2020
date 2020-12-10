@@ -1,3 +1,12 @@
+/**
+ * == PART1 ==
+ * - join adapters -
+ * 
+ * == PART2 ==
+ * - distinct ways you can arrange the adapters -
+ * graph
+ */
+
 export function partOneCode(input) {
   const adapters = new Set(input);
   let lastAdapter = 0;
