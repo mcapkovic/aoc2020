@@ -88,11 +88,118 @@ export function partOneCode(input) {
   return countOccupied;
 }
 
+const neighborhood2 = {
+  0: (input, row, col) => {
+    const seat = input[row - 1] && input[row - 1][col - 1];
+    if (seat === ".") {
+      return neighborhood2[0](input, row - 1, col - 1);
+    }
+    if (seat) return seat;
+    return "no-seat";
+  },
+  1: (input, row, col) => {
+    const seat = input[row - 1] && input[row - 1][col];
+    if (seat === ".") {
+      return neighborhood2[1](input, row - 1, col);
+    }
+    if (seat) return seat;
+    return "no-seat";
+  },
+  2: (input, row, col) => {
+    const seat = input[row - 1] && input[row - 1][col + 1];
+    if (seat === ".") {
+      return neighborhood2[2](input, row - 1, col + 1);
+    }
+    if (seat) return seat;
+    return "no-seat";
+  },
+  3: (input, row, col) => {
+    const seat = input[row][col - 1];
+    if (seat === ".") {
+      return neighborhood2[3](input, row, col - 1);
+    }
+    if (seat) return seat;
+    return "no-seat";
+  },
+  4: (input, row, col) => {
+    const seat = input[row][col + 1];
+    if (seat === ".") {
+      return neighborhood2[4](input, row, col + 1);
+    }
+    if (seat) return seat;
+    return "no-seat";
+  },
+  5: (input, row, col) => {
+    const seat = input[row + 1] && input[row + 1][col - 1];
+    if (seat === ".") {
+      return neighborhood2[5](input, row + 1, col - 1);
+    }
+    if (seat) return seat;
+    return "no-seat";
+  },
+
+  6: (input, row, col) => {
+    const seat = input[row + 1] && input[row + 1][col];
+    if (seat === ".") {
+      return neighborhood2[6](input, row + 1, col);
+    }
+    if (seat) return seat;
+    return "no-seat";
+  },
+  7: (input, row, col) => {
+    const seat = input[row + 1] && input[row + 1][col + 1];
+    if (seat === ".") {
+      return neighborhood2[7](input, row + 1, col + 1);
+    }
+    if (seat) return seat;
+    return "no-seat";
+  },
+};
+
+function newSeatState2(input, row, col, currentState) {
+  if (currentState === ".") return currentState;
+
+  // console.log("neighborhood", neighborhood[0](input, row, col));
+
+  const neighborhoodSeats = [];
+  for (let index = 0; index < 8; index++) {
+    neighborhoodSeats.push(neighborhood2[index](input, row, col));
+  }
+
+  const occupiedCount = neighborhoodSeats.filter((seat) => seat === "#");
+
+  // console.log(occupiedCount);
+  if (currentState === "L") return occupiedCount.length === 0 ? "#" : "L";
+  if (currentState === "#") return occupiedCount.length >= 5 ? "L" : "#";
+}
+
+function runRound2(input, loop) {
+  if (loop === 0) return input;
+  const newSeating = input.map((row, rowIndex) => {
+    let test = "";
+    for (let colIndex = 0; colIndex < row.length; colIndex++) {
+      const element = row[colIndex];
+      // console.log(element)
+      const newSeat = newSeatState2(input, rowIndex, colIndex, element);
+      test = test + newSeat;
+    }
+    return test;
+  });
+  // console.log('loop', loop);
+  // console.log(newSeating);
+  return runRound2(newSeating, loop - 1);
+}
+
 export function partTwoCode(input) {
-  /**
-   * space for the code
-   */
-  return "Part2 answer.";
+  const seating = runRound2(input, 300);
+  console.log(seating);
+  const countOccupied = seating
+    .map((row) => {
+      return [...row].filter((seat) => seat === "#").length;
+    })
+    .reduce((accumulator, currentValue) => accumulator + currentValue);
+
+  return countOccupied;
 }
 
 const e1p1 = `
