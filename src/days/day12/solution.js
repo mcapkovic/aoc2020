@@ -55,17 +55,76 @@ export function partOneCode(input) {
   };
 
   input.forEach((instruction) => {
-    boat = actions[instruction.action](boat, instruction.value)
+    boat = actions[instruction.action](boat, instruction.value);
   });
 
   return Math.abs(boat.position[0]) + Math.abs(boat.position[1]);
 }
 
+const actions2 = {
+  N: (boat, value) => {
+    const newPosition = [boat.position[0], boat.position[1] - value];
+    return { ...boat, position: newPosition };
+  },
+  S: (boat, value) => {
+    const newPosition = [boat.position[0], boat.position[1] + value];
+    return { ...boat, position: newPosition };
+  },
+  E: (boat, value) => {
+    const newPosition = [boat.position[0] + value, boat.position[1]];
+    return { ...boat, position: newPosition };
+  },
+  W: (boat, value) => {
+    const newPosition = [boat.position[0] - value, boat.position[1]];
+    return { ...boat, position: newPosition };
+  },
+  L: (waypoint, value) => {
+    const turn = value / 90;
+    const position = [waypoint.position[0], waypoint.position[1]];
+    let newPosition = [];
+    if (turn === 2) {
+      newPosition = [position[0] * -1, position[1] * -1];
+    } else if (turn === 1) {
+      newPosition = [position[1], position[0] * -1];
+    } else if (turn === 3) {
+      newPosition = [position[1] * -1, position[0]];
+    }
+    return { position: newPosition };
+  },
+  R: (waypoint, value) => {
+    const turn = value / 90;
+    const position = [waypoint.position[0], waypoint.position[1]];
+    let newPosition = [];
+    if (turn === 2) {
+      newPosition = [position[0] * -1, position[1] * -1];
+    } else if (turn === 1) {
+      newPosition = [position[1] * -1, position[0]];
+    } else if (turn === 3) {
+      newPosition = [position[1], position[0] * -1];
+    }
+    return { position: newPosition };
+  },
+};
+
 export function partTwoCode(input) {
-  /**
-   * space for the code
-   */
-  return "Part2 answer.";
+  let boat = {
+    position: [0, 0],
+    facing: "E",
+  };
+  let waypoint = { position: [10, -1] };
+
+  input.forEach((instruction) => {
+    if (instruction.action === "F") {
+      boat.position = [
+        boat.position[0] + waypoint.position[0] * instruction.value,
+        boat.position[1] + waypoint.position[1] * instruction.value,
+      ];
+    } else {
+      waypoint = actions2[instruction.action](waypoint, instruction.value);
+    }
+  });
+
+  return Math.abs(boat.position[0]) + Math.abs(boat.position[1]);
 }
 
 const e1p1 = `
