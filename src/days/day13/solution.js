@@ -1,26 +1,41 @@
 export function partOneCode(input) {
   let currentTime = input[0];
+  const buses = input[1].filter((value) => value !== "x");
   let isFinished = false;
   let busId = 0;
   do {
     currentTime++;
-    isFinished = input[1].some((id) => {
+    isFinished = buses.some((id) => {
       if (currentTime % id === 0) {
         busId = id;
         return true;
       }
     });
-    // console.log(currentTime)
   } while (!isFinished);
 
   return (currentTime - input[0]) * busId;
 }
 
 export function partTwoCode(input) {
-  /**
-   * space for the code
-   */
-  return "Part2 answer.";
+  // let currentTime = 100000000000000;
+  let currentTime = 0;
+  // const noOfBusses = input[1].filter((value) => value !== "x");
+  // const buses = input[1];
+  // let validBusses = [];
+
+  // do {
+  //   currentTime++;
+  //   validBusses = [];
+  //   buses.forEach((bus, index) => {
+  //     if (bus === "x") return;
+  //     if ((currentTime + index) % bus === 0) {
+  //       validBusses.push(bus);
+  //     }
+  //   });
+  //   console.log(currentTime)
+  // } while (validBusses.length !== noOfBusses);
+
+  return currentTime;
 }
 
 const e1p1 = `
@@ -30,7 +45,7 @@ const e1p1 = `
 
 export function inputParse(originalInput) {
   let currentInput = originalInput;
-  // currentInput = e1p1;
+  currentInput = e1p1;
 
   let parsedInput = currentInput
     .trim()
@@ -39,10 +54,12 @@ export function inputParse(originalInput) {
       if (i === 0) {
         return Number(row);
       }
-      return row
-        .split(",")
-        .filter((value) => value !== "x")
-        .map((value) => Number(value));
+      return (
+        row
+          .split(",")
+          // .filter((value) => value !== "x")
+          .map((value) => (value !== "x" ? Number(value) : value))
+      );
     });
 
   return {
