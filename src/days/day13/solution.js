@@ -19,6 +19,11 @@ export function partOneCode(input) {
 export function partTwoCode(input) {
   // let currentTime = 100000000000000;
   let currentTime = 0;
+  const busses= {}
+  input[1].forEach((bus,i) => {
+    if (bus !== "x") busses[i] = bus
+  });
+  return busses
   // const noOfBusses = input[1].filter((value) => value !== "x");
   // const buses = input[1];
   // let validBusses = [];
