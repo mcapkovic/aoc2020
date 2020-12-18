@@ -1,48 +1,53 @@
+function getSubValue(prevValue, newValue, operator) {
+  if (!operator) return newValue;
+  if (operator === "*") return prevValue * newValue;
+  return prevValue + newValue;
+}
+
 function getValue(equation) {
   let level = 0;
   const values = {};
   const operators = {};
 
-  for (const char of equation) {
-    if (char === "*") operators[level] = "*";
-    if (char === "+") operators[level] = "+";
+  const update = (char) => {
+    if (char === "*") {
+      operators[level] = "*";
+    } else if (char === "+") {
+      operators[level] = "+";
+    } else if (char === "(") {
+      level++;
+    } else if (char === ")") {
+      values[level - 1] = getSubValue(
+        values[level - 1],
+        values[level],
+        operators[level - 1]
+      );
 
-    if (char === "(") level++;
-
-    if (char === ")") {
-      if (operators[level - 1] === "*") {
-        values[level - 1] = values[level - 1] * values[level];
-      } else if (operators[level - 1] === "+") {
-        values[level - 1] = values[level - 1] + values[level];
-      } else {
-        values[level - 1] = values[level];
-      }
-      operators[level-1] = undefined
+      operators[level - 1] = undefined;
       values[level] = 0;
       level--;
     }
+  };
 
+  for (const char of equation) {
     if (Number(char)) {
-      if (values[level] && operators[level]) {
-        if (operators[level] === "*"){
-          values[level] = values[level] * Number(char)
-          operators[level] = undefined
-        };
-        if (operators[level] === "+"){
-          values[level] = values[level] + Number(char);
-          operators[level] = undefined
-        }
-      } else {
-        values[level] = Number(char);
-      }
+      values[level] = getSubValue(
+        values[level],
+        Number(char),
+        operators[level]
+      );
+      operators[level] = undefined;
+    } else {
+      update(char);
     }
-
   }
   return values["0"];
 }
 
 export function partOneCode(input) {
-  return input.map((equation) => getValue(equation)).reduce((accumulator, currentValue) => accumulator + currentValue);
+  return input
+    .map((equation) => getValue(equation))
+    .reduce((accumulator, currentValue) => accumulator + currentValue);
 }
 
 export function partTwoCode(input) {
@@ -77,17 +82,17 @@ const e3p1 = `
 const e4p1 = `
 3*9+(5*3+2*(4+2*9+2*8)*(7*5*9))+2+9+((4*9+5+6)*(3+5+5*4+7)+3*7+3+(3+3+2))
 ((4*9+5+6)*(3+5+5*4+7)+3*7+3+(3+3+2))
-`
+`;
 
 const e5p1 = `
 ((4*9+5+6)*(3+5+5*4+7)+3*7+3+(3+3+2))
-`
+`;
 
 const e6p1 = `
 3*9+(5*3+2*(4+2*9+2*8)*(7*5*9))+2+9
 ((4*9+5+6)*(3+5+5*4+7)+3*7+3+(3+3+2))
 3*9+(5*3+2*(4+2*9+2*8)*(7*5*9))+2+9+((4*9+5+6)*(3+5+5*4+7)+3*7+3+(3+3+2))
-`
+`;
 
 export function inputParse(originalInput) {
   let currentInput = originalInput;
@@ -97,7 +102,6 @@ export function inputParse(originalInput) {
   // currentInput = e4p1
   // currentInput = e5p1
   // currentInput = e6p1
-
 
   const regex = / /gi;
   let parsedInput = currentInput.trim().replace(regex, "").split("\n");
